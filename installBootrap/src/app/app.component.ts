@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Product } from './product/product';
 
 
@@ -7,7 +7,10 @@ import { Product } from './product/product';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
+
+
+
   title = 'installBootrap';
   products : Product [] = [
     { id:1,name:'hat', quatity:100,price:300, discount:10 },
@@ -15,6 +18,10 @@ export class AppComponent {
     { id:3,name:'Jean', quatity:100,price:100, discount:10 }
   ]
 
+  // Phương thức này được khỏi tạo khi ta kkhai báo implement trên Appcomponent
+  ngAfterViewInit(): void {
+      this.render(this.show);
+  }
   // Hàm Show Để Hiện Thị lên component
   show(innerHTML:string){
 
@@ -28,13 +35,16 @@ export class AppComponent {
 render(callback: (data:string) => any){
     let innerHTML = this.products.map(item =>{
         return `
-            <tr>
-              <id>${item.id}</id>
-              <id>${item.name}</id>
-              <id>${item.quatity}</id>
-              <id>${item.price}</id>
-              <id>${item.discount}</id>
-            </tr> `
+          <div>
+              <p>ID: ${item.id}</p>
+              <p>Name: ${item.name}</p>
+              <p>Quatity: ${item.quatity}</p>
+              <p>Price: ${item.price}</p>
+              <p>Discount: ${item.discount}</p>
+              <p>  <button id="${item.id}" class="btn btn-secondary" >Buy Now</button></p>
+          </div>`
+
+
     }).join('')
   callback(innerHTML);
   }
