@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from './product/product';
 
 
 @Component({
@@ -8,7 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'installBootrap';
-  myProduct = {
+  myProduct : Product = {
     name: 'Hat',
+    quatity: 200,
+    price: 500
   }
 }
